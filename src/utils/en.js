@@ -83,5 +83,6 @@ export default {
   china: 'China',
   faceRecognitionLogin: 'Face Recognition Login',
   PermissionsCamera: 'Permissions are turned off, or the browser cannot turn on the camera',
+  duplcatedfile: 'Can not upload duplicated file',
   Uploadface: 'Upload photos'
 }

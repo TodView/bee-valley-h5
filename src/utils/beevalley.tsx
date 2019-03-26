@@ -9,6 +9,10 @@ function handleRes(res) {
   return res.data
 }
 
+function getErrorCode(errorInfo) {
+  return errorInfo && errorInfo.error && errorInfo.error.code
+}
+
 function handleError(res) {
   if (res.statusCode === 500) {
     throw 'system error'
@@ -21,10 +25,12 @@ function handleError(res) {
     throw 'unauthorized'
   } else if (res.statusCode === 403) {
     let errorInfo = parseJson(res.data)
-    if (errorInfo && errorInfo.error && errorInfo.error.code === "13") {
+    if (getErrorCode(errorInfo) === "13") {
       throw 'user exists'
-    } else if (errorInfo && errorInfo.error && errorInfo.error.code === "14") {
+    } else if (getErrorCode(errorInfo) === "14") {
       throw 'invalid code'
+    } else if (getErrorCode(errorInfo) === "21") {
+      throw 'duplicated file'
     } else {
       throw 'forbidden'
     }
@@ -292,8 +298,10 @@ function uploadWorkFile(token, workId, fileSrc) {
       header: {
         'Authorization': 'Bearer ' + token
       },
-      data: formData
-    }).then(handleRes);
+      data: formData,
+      dataType: 'text',
+      responseType: 'text'
+    }).then(handleRes).then(parseJson)
   });
 
 }

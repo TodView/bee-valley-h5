@@ -48,6 +48,11 @@ export default class DataAcquistion extends Taro.Component {
       Taro.navigateBack({
         delta: 1
       })
+    } else if (error === 'duplicated file') {
+      Taro.showToast({
+        title: `${i18next.t('duplcatedfile')}`,
+        mask: true
+      })
     } else {
       Taro.showToast({
         title: error,
@@ -172,7 +177,7 @@ export default class DataAcquistion extends Taro.Component {
           this.countIndex++;
           ele.fileId = res[0];
           this.uploadImg();
-        })
+        }).catch(this.defaultErrorHandling)
       }
     }
   }
