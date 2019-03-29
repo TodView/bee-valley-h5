@@ -186,7 +186,7 @@ export default class Login extends Component {
     } = this.state;
 
     return (
-      <View className='loginWrap' onClick={() => closeList(this)}>
+      <View className='loginWrap' onClick={closeList}>
         <View className='changeLanguage'>
           <Text className={language === 'en' ? 'select' : ''} onClick={this.changeLanGe.bind(this, 'en')}>English</Text>|<Text className={language === 'cn' ? 'select' : ''} onClick={this.changeLanGe.bind(this, 'cn')} >中文</Text>
         </View>

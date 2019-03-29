@@ -237,7 +237,7 @@ export default class resetUserPassword extends Component{
     } = this.state
 
     return(
-      <View className='resetPassword' onClick={() => closeList(this)}>
+      <View className='resetPassword' onClick={closeList}>
         <NavBar title={i18next.t('resetPassword')} verification />
         <View className='resetPassword-wrap'>
           <Text className='title'>{i18next.t('resetPassword')}</Text>

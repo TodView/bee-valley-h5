@@ -209,7 +209,7 @@ export default class Register extends Component {
     } = this.state
 
     return (
-      <View className='registerWrap' onClick={() => closeList(this)}>
+      <View className='registerWrap' onClick={closeList}>
         <NavBar title={i18next.t('userRegister')} verification />
         <View className='register-wrap'>
           <Text className='title'>{i18next.t('userRegister')}</Text>

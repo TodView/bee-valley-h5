@@ -252,7 +252,7 @@ function register(mobile, passwd, code, region) {
   }).then(handleRes)
 }
 
-function loginSms(mobile, code, region){
+function loginSms(mobile, code, region) {
   return Taro.request({
     url: `${host}login/sms`,
     method: 'POST',
@@ -280,40 +280,41 @@ function checkDveice(res) {
 function uploadWorkFile(token, workId, fileSrc) {
 
   return fetch(fileSrc)
-  .then(res => res.blob())
-  .then(blob => {
-    let formData = new FormData();
-    formData.append("workId", workId);
-    formData.append("file", blob);
+    .then(res => res.blob())
+    .then(blob => {
+      let formData = new FormData();
+      formData.append("workId", workId);
+      formData.append("file", blob);
 
-    return Taro.request({
-      url: `${host}works/files`,
-      method: 'POST',
-      header: {
-        'Authorization': 'Bearer ' + token
-      },
-      data: formData
-    }).then(handleRes);
-  });
+      return Taro.request({
+        url: `${host}works/files`,
+        method: 'POST',
+        header: {
+          'Authorization': 'Bearer ' + token
+        },
+        data: formData
+      }).then(handleRes);
+    });
 
 }
 
-function wxLogin(a, b){
-    var c = "default";
-    a.self_redirect === !0 ? c = "true" : a.self_redirect === !1 && (c = "false");
-    var d = b.createElement("iframe"),
+function wxLogin(a, b) {
+  var c = "default";
+  a.self_redirect === !0 ? c = "true" : a.self_redirect === !1 && (c = "false");
+  var d = b.createElement("iframe"),
     e = "https://open.weixin.qq.com/connect/qrconnect?appid=" + a.appid + "&scope=" + a.scope + "&redirect_uri=" + a.redirect_uri + "&state=" + a.state + "&login_type=jssdk&self_redirect=" + c;
-    e += a.style ? "&style=" + a.style : "", e += a.href ? "&href=" + a.href : "",
+  e += a.style ? "&style=" + a.style : "", e += a.href ? "&href=" + a.href : "",
     d.src = e,
     d.frameBorder = "0",
     d.allowTransparency = "true",
     d.scrolling = "no",
     d.width = "300px",
     d.height = "400px";
-    var f = b.getElementById(a.id); f.innerHTML = "", f.appendChild(d);
+  var f = b.getElementById(a.id);
+  f.innerHTML = "", f.appendChild(d);
 }
 
-function resetPasswords(mobile, password, code, region){
+function resetPasswords(mobile, password, code, region) {
   return Taro.request({
     url: `${host}password/reset`,
     method: 'POST',
@@ -331,7 +332,7 @@ function resetPasswords(mobile, password, code, region){
   }).then(handleRes)
 }
 
-function getAttribute(token, category, attribute, prerequisiteId){
+function getAttribute(token, category, attribute, prerequisiteId) {
   return Taro.request({
     url: prerequisiteId ? `${host}categories/${category}/attributes/${attribute}?prerequisite=${prerequisiteId}` : `${host}categories/${category}/attributes/${attribute}`,
     method: 'GET',
@@ -344,8 +345,10 @@ function getAttribute(token, category, attribute, prerequisiteId){
   }).then(handleRes)
 }
 
-function selectRegion(that, index){
-  let { regionData } = that.state;
+function selectRegion(that, index) {
+  let {
+    regionData
+  } = that.state;
   regionData.selectIndex = index;
   that.setState({
     regionData: regionData
@@ -354,23 +357,29 @@ function selectRegion(that, index){
   closeList(that)
 }
 
-function closeList(that){
-  let { regionData } = that.state;
-  regionData.isOpen = false;
-  that.setState({
-    regionData: regionData
-  })
+function closeList(that) {
+  if (that.state) {
+    let {
+      regionData
+    } = that.state;
+    regionData.isOpen = false;
+    that.setState({
+      regionData: regionData
+    })
+  }
 }
 
-function openList(that){
-  let { regionData } = that.state;
+function openList(that) {
+  let {
+    regionData
+  } = that.state;
   regionData.isOpen = true;
   that.setState({
     regionData: regionData
   })
 }
 
-function uploadImg(token, fileSrc){
+function uploadImg(token, fileSrc) {
   return fetch(fileSrc)
     .then(res => res.blob())
     .then(blob => {
@@ -390,25 +399,25 @@ function uploadImg(token, fileSrc){
     });
 }
 
-function faceLogin(region, phone, blob){
+function faceLogin(region, phone, blob) {
   // return
   // fetch(fileSrc)
   //   .then(res => res.blob())
   //   .then(blob => {
-      let formData = new FormData();
-      formData.append("file", blob);
+  let formData = new FormData();
+  formData.append("file", blob);
 
-      return Taro.request({
-        url: `${host}login/face/${region}/${phone}`,
-        method: 'POST',
-        data: formData,
-        dataType: 'text',
-        responseType: 'text'
-      }).then(res => res).catch(err => err);
-    // });
+  return Taro.request({
+    url: `${host}login/face/${region}/${phone}`,
+    method: 'POST',
+    data: formData,
+    dataType: 'text',
+    responseType: 'text'
+  }).then(res => res).catch(err => err);
+  // });
 }
 
-function qqLogin(){
+function qqLogin() {
 
 }
 

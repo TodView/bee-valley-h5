@@ -188,7 +188,7 @@ export default class Register extends Component {
     } = this.state
 
     return (
-      <View className='phoneLoginWrap' onClick={() => closeList(this)}>
+      <View className='phoneLoginWrap' onClick={closeList}>
         <NavBar title={i18next.t('CodeLogin')} verification />
         <View className='phone-wrap'>
           <Text className='title'>{i18next.t('smsCodeLogin')}</Text>
