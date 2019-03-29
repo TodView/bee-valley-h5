@@ -114,7 +114,7 @@ export default class faceRecognitionLogin extends Component {
     if (this.mediaStreamTrack) {
       let context = this.canvas.getContext("2d");
       // TODO
-      context.drawImage(this.video, 0, 0, this.videoWidth, this.videoHeight);
+      context.drawImage(this.video, 0, 0, 300, 300);
       let that = this
       this.canvas.toBlob((blob) => {
         if (blob) {
