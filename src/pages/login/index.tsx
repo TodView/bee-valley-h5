@@ -10,7 +10,6 @@ import {
 } from '@tarojs/components'
 import {
   phoneLogin,
-  wechatLogin,
   checkDveice,
   selectRegion,
   closeList,
@@ -87,18 +86,18 @@ export default class Login extends Component {
     //   })
     // }
 
-    var url = new URL(window.location.href);
-    this.code = url.searchParams.get('code');
-    if (this.code) {
-      wechatLogin(this.code).then((token) => {
-        Taro.setStorageSync('apiToken', token)
-        Taro.setStorageSync('login', true)
+    // var url = new URL(window.location.href);
+    // this.code = url.searchParams.get('code');
+    // if (this.code) {
+    //   wechatLogin(this.code).then((token) => {
+    //     Taro.setStorageSync('apiToken', token)
+    //     Taro.setStorageSync('login', true)
 
-        Taro.redirectTo({
-          url: '/pages/index/index'
-        })
-      }).catch(this.defaultErrorHandling)
-    }
+    //     Taro.redirectTo({
+    //       url: '/pages/index/index'
+    //     })
+    //   }).catch(this.defaultErrorHandling)
+    // }
 
     if (i18next.language.toString() === 'en-US') {
       this.setState({

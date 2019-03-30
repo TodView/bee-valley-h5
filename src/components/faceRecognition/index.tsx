@@ -139,8 +139,8 @@ export default class faceRecognitionLogin extends Component {
         </View>
         <Video
           id='webcam'
-          loop
-          autoplay
+          muted={true}
+          autoplay={true}
           className='Video'
         >
         </Video>

@@ -9,6 +9,7 @@ import {
 } from '@tarojs/components'
 import TaskList from '../../components/taskList/index'
 import {
+  wechatLogin,
   listAuthorizedWork,
   listAuthorizedReview,
   checkDveice
@@ -32,6 +33,37 @@ export default class Index extends Taro.Component {
   }
 
   componentDidMount() {
+    // TODO
+
+    var url = new URL(window.location.href);
+    this.code = url.searchParams.get('code');
+    if (this.code) {
+      let that = this
+      wechatLogin(this.code).then((token) => {
+        Taro.setStorageSync('apiToken', token)
+        Taro.setStorageSync('login', true)
+        that.initPage()
+
+        // Taro.redirectTo({
+        //   url: '/pages/index/index'
+        // })
+      }).catch(this.defaultErrorHandling)
+    } else {
+      const login = Taro.getStorageSync('login')
+
+      if (login !== true) {
+        Taro.redirectTo({
+          url: '/pages/login/index'
+        })
+      } else {
+        this.initPage()
+      }
+
+    }
+
+  }
+
+  initPage = () => {
     this.apiToken = Taro.getStorageSync('apiToken');
 
     this.isShowReview = Taro.getStorageSync('taskonly') ? Taro.getStorageSync('taskonly') : false;
@@ -56,7 +88,6 @@ export default class Index extends Taro.Component {
         reviewList: reviewList
       })
     })
-
   }
 
   navigateToTask = (item) => {
@@ -93,7 +124,7 @@ export default class Index extends Taro.Component {
           Taro.removeStorageSync('login')
           Taro.removeStorageSync('apiToken')
           Taro.redirectTo({
-            url: '/'
+            url: '/pages/login/index'
           })
         }
       }
@@ -111,7 +142,7 @@ export default class Index extends Taro.Component {
     const tabList = !this.isShowReview ?
       [{
         title: i18next.t('TaskList')
-        }, {
+      }, {
         title: i18next.t('Auditlist')
       }] :
       [{

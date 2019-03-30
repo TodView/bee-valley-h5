@@ -50,11 +50,11 @@ export default class Register extends Component {
     });
   }
 
-  toLogin = () => {
-    Taro.redirectTo({
-      url: '/pages/login/index'
-    })
-  }
+  // toLogin = () => {
+  //   Taro.redirectTo({
+  //     url: '/pages/login/index'
+  //   })
+  // }
 
   lessTime = () => {
     let {

@@ -28,8 +28,7 @@ export default class wechatLogin extends Component {
       state: Math.ceil(Math.random() * 1000),
       style: "black",
       href: ""
-    }, document);
-
+    }, document)
   }
 
   render() {

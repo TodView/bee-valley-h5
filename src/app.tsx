@@ -17,10 +17,10 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/index/index',
       'pages/login/index',
       'pages/attribute_review/index',
       'pages/signup/index',
-      'pages/index/index',
       'pages/rect_task/index',
       'pages/rect_review/index',
       'pages/count_task/index',

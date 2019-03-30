@@ -16,7 +16,7 @@ function handleError(res) {
     Taro.removeStorageSync('login')
     Taro.removeStorageSync('apiToken')
     Taro.redirectTo({
-      url: '/'
+      url: '/pages/login/index'
     })
     throw 'unauthorized'
   } else if (res.statusCode === 403) {
